@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
     <link rel="icon" href="logo.png" type="image/x-icon"> <!-- Favicon -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-       body {
+        body {
             background-color: #f1efeb; /* Color de fondo */
             font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
         }
@@ -47,57 +48,63 @@
             color: #3D1C00;
             padding-top: 10px;
         }
-        .btn{
-            
+        @media (max-width: 768px) {
+            .epstitle {
+                font-size: 24px; /* Ajusta el tamaño del título en pantallas pequeñas */
+            }
+            .logo {
+                max-width: 80px; /* Ajusta el tamaño del logo en pantallas pequeñas */
+            }
         }
     </style>    
-    
     <script>
         // Función para cargar el iframe
         function cargarIframe(url) {
             document.getElementById("miIframe").src = url;
         }
         // Función para manejar el envío del formulario
-        document.getElementById("citaForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evita el envío del formulario
-            // Obtener datos del formulario
-            const nombre = document.getElementById("nombre").value;
-            const email = document.getElementById("email").value;
-            const telefono = document.getElementById("telefono").value;
-            const fecha = document.getElementById("fecha").value;
-            // Crear objeto de cita
-            const cita = {
-                nombre,
-                email,
-                telefono,
-                fecha
-            };
-            // Obtener citas del localStorage o inicializar un array vacío
-            let citas = JSON.parse(localStorage.getItem("citas")) || [];
-            // Agregar nueva cita al array
-            citas.push(cita);
-            // Guardar el array actualizado en localStorage
-            localStorage.setItem("citas", JSON.stringify(citas));
-            // Actualizar la lista de citas mostradas
-            mostrarCitas();
-            // Limpiar el formulario
-            document.getElementById("citaForm").reset();
-        });
-        // Función para mostrar las citas en la lista
-        function mostrarCitas() {
-            const listaCitas = document.getElementById("listaCitas");
-            listaCitas.innerHTML = ""; // Limpiar la lista antes de mostrar
-            // Obtener citas del localStorage
-            let citas = JSON.parse(localStorage.getItem("citas")) || [];
-            // Iterar sobre las citas y agregarlas a la lista
-            citas.forEach(cita => {
-                const li = document.createElement("li");
-                li.textContent = `${cita.nombre} - ${cita.email} - ${cita.telefono} - ${cita.fecha}`;
-                listaCitas.appendChild(li);
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("citaForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Evita el envío del formulario
+                // Obtener datos del formulario
+                const nombre = document.getElementById("nombre").value;
+                const email = document.getElementById("email").value;
+                const telefono = document.getElementById("telefono").value;
+                const fecha = document.getElementById("fecha").value;
+                // Crear objeto de cita
+                const cita = {
+                    nombre,
+                    email,
+                    telefono,
+                    fecha
+                };
+                // Obtener citas del localStorage o inicializar un array vacío
+                let citas = JSON.parse(localStorage.getItem("citas")) || [];
+                // Agregar nueva cita al array
+                citas.push(cita);
+                // Guardar el array actualizado en localStorage
+                localStorage.setItem("citas", JSON.stringify(citas));
+                // Actualizar la lista de citas mostradas
+                mostrarCitas();
+                // Limpiar el formulario
+                document.getElementById("citaForm").reset();
             });
-        }
-        // Mostrar citas al cargar la página
-        mostrarCitas();
+            // Función para mostrar las citas en la lista
+            function mostrarCitas() {
+                const listaCitas = document.getElementById("listaCitas");
+                listaCitas.innerHTML = ""; // Limpiar la lista antes de mostrar
+                // Obtener citas del localStorage
+                let citas = JSON.parse(localStorage.getItem("citas")) || [];
+                // Iterar sobre las citas y agregarlas a la lista
+                citas.forEach(cita => {
+                    const li = document.createElement("li");
+                    li.textContent = `${cita.nombre} - ${cita.email} - ${cita.telefono} - ${cita.fecha}`;
+                    listaCitas.appendChild(li);
+                });
+            }
+            // Mostrar citas al cargar la página
+            mostrarCitas();
+        });
     </script>
 </head>
 <body>
@@ -113,7 +120,7 @@
             <button class="btn btn-info" onclick="window.open('assets/GUIA EPS.pdf', '_blank')">Guias</button>
         </div>
         <div id="contenido">
-            <iframe id="miIframe" src="" style="width: 100%; height: 400px;"></iframe>
+            <iframe id="miIframe" src=""></iframe>
         </div>
         <!-- Pestañas para Solicitar Cita y Citas Realizadas -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
