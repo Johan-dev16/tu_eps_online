@@ -103,14 +103,14 @@
 <body>
     <div class="container">
         <header class="text-center mb-4">
-            <img src="logo.png" alt="Logo del Aplicativo" class="logo"> <!-- Logo en el título -->
+            <img src="assets/logo.png" alt="Logo del Aplicativo" class="logo"> <!-- Logo en el título -->
             <h1 class="epstitle">Tu EPS online</h1>
         </header>
         <div class="text-center mb-6 btn-group-toggle">
-            <button class="btn btn-info" onclick="location.href='https://www.adres.gov.co/'">¿A cual EPS pertenezco?</button>
-            <button class="btn btn-info" onclick="cargarIframe('https://www.clinicasyhospitalesdecolombia.com/index/CH-eps-detalle.php')">Directorio EPS</button>
-            <button class="btn btn-info" onclick="cargarIframe('https://www.famisanar.com.co/')">Famisanar Eps</button>
-            <button class="btn btn-info" onclick="cargarIframe('assets/GUIA EPS.pdf')">Guias</button>
+            <button class="btn btn-info" onclick="window.open('https://www.adres.gov.co/', '_blank')">¿A cual EPS pertenezco?</button>
+            <button class="btn btn-info" onclick="window.open('https://www.clinicasyhospitalesdecolombia.com/index/CH-eps-detalle.php', '_blank')">Directorio EPS</button>
+            <button class="btn btn-info" onclick="window.open('https://www.famisanar.com.co/', '_blank')">Famisanar Eps</button>
+            <button class="btn btn-info" onclick="window.open('assets/GUIA EPS.pdf', '_blank')">Guias</button>
         </div>
         <div id="contenido">
             <iframe id="miIframe" src="" style="width: 100%; height: 400px;"></iframe>
