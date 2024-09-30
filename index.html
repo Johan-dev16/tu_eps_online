@@ -1,22 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu EPS Online</title>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" href="assets/logo.png" type="image/x-icon"> <!-- Favicon -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+       body {
+            background-color: #F0D8A8; /* Color de fondo */
+            font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
+        }
+        .container {
+            margin-top: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+        .form-section, .citas-list {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #86B8B1; /* Color de fondo de las secciones */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            width: 100%; /* El logo ocupará el 100% del contenedor */
+            max-width: 100px; /* Ajusta el tamaño máximo del logo */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 50%; /* Hace que el logo sea redondeado */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #3D1C00; /* Color de los encabezados */
+        }
+        button {
+            background-color: #FA2A00; /* Color de fondo de los botones */
+            color: #FFFFFF; /* Color del texto de los botones */
+        }
+        button:hover {
+            background-color: #F2D694; /* Color de fondo al pasar el ratón */
+        }
+        .epstitle {
+            font-size: 30px;
+            font-weight: bold;
+            color: #3D1C00;
+            padding-top: 10px;
+        }
+        .btn{
+            
+        }
+    </style>    
     
     <script>
+        // Función para cargar el iframe
         function cargarIframe(url) {
-            document.getElementById('miIframe').src = url;
+            document.getElementById("miIframe").src = url;
         }
+        // Función para manejar el envío del formulario
+        document.getElementById("citaForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita el envío del formulario
+            // Obtener datos del formulario
+            const nombre = document.getElementById("nombre").value;
+            const email = document.getElementById("email").value;
+            const telefono = document.getElementById("telefono").value;
+            const fecha = document.getElementById("fecha").value;
+            // Crear objeto de cita
+            const cita = {
+                nombre,
+                email,
+                telefono,
+                fecha
+            };
+            // Obtener citas del localStorage o inicializar un array vacío
+            let citas = JSON.parse(localStorage.getItem("citas")) || [];
+            // Agregar nueva cita al array
+            citas.push(cita);
+            // Guardar el array actualizado en localStorage
+            localStorage.setItem("citas", JSON.stringify(citas));
+            // Actualizar la lista de citas mostradas
+            mostrarCitas();
+            // Limpiar el formulario
+            document.getElementById("citaForm").reset();
+        });
+        // Función para mostrar las citas en la lista
+        function mostrarCitas() {
+            const listaCitas = document.getElementById("listaCitas");
+            listaCitas.innerHTML = ""; // Limpiar la lista antes de mostrar
+            // Obtener citas del localStorage
+            let citas = JSON.parse(localStorage.getItem("citas")) || [];
+            // Iterar sobre las citas y agregarlas a la lista
+            citas.forEach(cita => {
+                const li = document.createElement("li");
+                li.textContent = `${cita.nombre} - ${cita.email} - ${cita.telefono} - ${cita.fecha}`;
+                listaCitas.appendChild(li);
+            });
+        }
+        // Mostrar citas al cargar la página
+        mostrarCitas();
     </script>
 </head>
 <body>
